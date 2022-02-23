@@ -27,6 +27,11 @@ public class Main {
         ArrayList<Task> filteredList = filterTaskByString(tasksData, "11");
         System.out.println("\nPrinting filtered list of data");
         printData(filteredList);
+
+
+        System.out.println("Total number of deadlines (using Stream) : " +
+                countDeadlinesWithStreams(tasksData));
+
     }
 
     private static int countDeadlines(ArrayList<Task> tasksData) {
@@ -39,10 +44,25 @@ public class Main {
         return count;
     }
 
+    private static int countDeadlinesWithStreams(ArrayList<Task> tasksData) {
+        int count = 0;
+        count = (int)tasksData.stream()
+                .filter((t) -> t instanceof Deadline)
+                .count();
+        return count;
+    }
+
     public static void printData(ArrayList<Task> tasksData) {
         for (Task t : tasksData) {
             System.out.println(t);
         }
+    }
+
+    public static  void printDataWithStreams(ArrayList<Task> tasks) {
+        System.out.println("\nPrint tasks using streams");
+        tasks.stream() // convert task date toa stream // replace streams with parallel stream multiple collection
+                .forEach(System.out::println); //terminal operation
+
     }
 
     public static void printDeadlines(ArrayList<Task> tasksData) {
@@ -52,7 +72,7 @@ public class Main {
             }
         }
     }
-
+    
     //sorted it with lamda
     public static void printDeadlineWithStream(ArrayList<Task> task) {
         System.out.println("\nPrinting deadline with streams (sorted)");
