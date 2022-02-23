@@ -61,4 +61,5 @@ public class Main {
             }
         }
     }
+                .forEach(System.out::println); // giving a ref hence resolve it by ::
 }
